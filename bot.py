@@ -3,10 +3,11 @@ import time
 from instagrapi import Client
 
 # Aapka Instagram account details (Cloud server isi se chalega)
-USERNAME = "AAPKA_USERNAME_YAHAN_LIKHO"
-PASSWORD = "AAPKA_PASSWORD_YAHAN_LIKHO"
-TARGET_THREAD_ID = "AAPKI_GC_ID_YAHAN_LIKHO"
-DESIRED_THEME_ID = "AAPKI_FAVOURITE_THEME_ID"
+USERNAME = "macedonalxeander"
+PASSWORD = "Userdiezade8200680213"
+TARGET_THREAD_ID = "12345"
+DESIRED_THEME_ID = "default"
+
 
 cl = Client()
 
