@@ -1,13 +1,20 @@
 import os
 import time
+import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from instagrapi import Client
 
-# Aapka Instagram account details (Cloud server isi se chalega)
+# Render port handler (Isse port error theek ho jayega)
+def run_server():
+    server = HTTPServer(('0.0.0.0', int(os.environ.get("PORT", 10000))), BaseHTTPRequestHandler)
+    server.serve_forever()
+threading.Thread(target=run_server, daemon=True).start()
+
+# Aapka Instagram account details
 USERNAME = "macedonalxeander"
 PASSWORD = "Userdiezade8200680213"
 TARGET_THREAD_ID = "12345"
 DESIRED_THEME_ID = "default"
-
 
 cl = Client()
 
@@ -20,11 +27,9 @@ except Exception as e:
 
 while True:
     try:
-        # Group chat ki current settings check karna
         thread_info = cl.direct_thread_info(TARGET_THREAD_ID)
         current_theme = thread_info.get('theme_id')
         
-        # Agar kisi ne theme badli toh yeh usko waapis theek karega
         if current_theme != DESIRED_THEME_ID:
             print("Theme badal gayi! Waapis lock kar raha hoon...")
             cl.direct_thread_set_theme(TARGET_THREAD_ID, DESIRED_THEME_ID)
@@ -33,6 +38,5 @@ while True:
     except Exception as e:
         print(f"Error aaya: {e}")
         
-    # Har 2 second mein group ko monitor karega
     time.sleep(2)
-  
+    
